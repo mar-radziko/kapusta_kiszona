@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>nowy_pokój_natalki_kapusta_kiszona</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: rgb(31, 31, 31);
+            overflow: hidden;
+        }
+
+        .napis_xd {
+            display: block;
+            margin: 30px;
+            color: white;
+            font-size: 2rem;
+            font-family: Arial, sans-serif;
+            font-weight: bolder;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            height: 4rem;
+            width: 10rem;
+
+            font-size: 1.5rem;
+            border-radius: 5px;
+            border: none;
+
+            box-shadow: 1px 1px 5px black;
+            background-color: rgb(238, 33, 142);
+
+            font-weight: bolder;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(255, 55, 160);
+        }
+    </style>
+</head>
+
+<body>
+
+    <a class="napis_xd">Natalka chyba ma nowy pokój???</a>
+
+    <button id="runaway-btn">No chyba nie.</button>
+
+    <script>
+        const button = document.getElementById("runaway-btn");
+
+        const youtubeLink =
+            "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1";
+
+        // Losowa liczba ucieczek: od 3 do 12
+        let remainingAttempts =
+            Math.floor(Math.random() * 10) + 3;
+
+        const getRandomNumber = (num) => {
+            return Math.floor(Math.random() * (num + 1));
+        };
+
+        const moveButton = () => {
+
+            const maxTop =
+                window.innerHeight - button.offsetHeight;
+
+            const maxLeft =
+                window.innerWidth - button.offsetWidth;
+
+            const top = getRandomNumber(maxTop);
+            const left = getRandomNumber(maxLeft);
+
+            anime({
+                targets: button,
+                left: left,
+                top: top,
+                easing: "easeOutCirc",
+                duration: 500
+            });
+        };
+
+        button.addEventListener("mouseover", () => {
+
+            if (remainingAttempts > 0) {
+
+                remainingAttempts--;
+
+                moveButton();
+
+                // Ostatnia ucieczka
+                if (remainingAttempts === 0) {
+                    button.textContent = "No dobra...";
+                    button.style.backgroundColor =
+                        "rgb(40, 180, 90)";
+                }
+            }
+        });
+
+        button.addEventListener("click", () => {
+
+            if (remainingAttempts === 0) {
+                window.location.href = youtubeLink;
+            }
+
+        });
+    </script>
+
+</body>
+</html>
